@@ -23,7 +23,7 @@ Route::put('/cargoejecutor/actualizar', 'CargoejecutorController@update');
 Route::put('/cargoejecutor/desactivar', 'CargoejecutorController@desactivar');
 Route::put('/cargoejecutor/activar', 'CargoejecutorController@activar');
 
-
+//pruebasishesler
 
 
 
