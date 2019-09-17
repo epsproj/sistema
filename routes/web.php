@@ -17,6 +17,7 @@ Route::get('/', function () {
 });
 //probando 
 //probando2
+//prueba angel
 Route::get('/cargoejecutor', 'CargoejecutorController@index');
 Route::post('/cargoejecutor/registrar', 'CargoejecutorController@store');
 Route::put('/cargoejecutor/actualizar', 'CargoejecutorController@update');
