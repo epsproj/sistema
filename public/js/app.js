@@ -34438,6 +34438,7 @@ Vue.component('estadodenuncia', __webpack_require__(/*! ./components/Estadodenun
 Vue.component('cargoejecutor', __webpack_require__(/*! ./components/Cargoejecutor.vue */ "./resources/js/components/Cargoejecutor.vue")["default"]);
 Vue.component('ejecutor', __webpack_require__(/*! ./components/Ejecutor.vue */ "./resources/js/components/Ejecutor.vue")["default"]);
 Vue.component('tipoobra', __webpack_require__(/*! ./components/Tipoobra.vue */ "./resources/js/components/Tipoobra.vue")["default"]);
+Vue.component('tipodevia', requiere('./componets/Tipodevia.vue')["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

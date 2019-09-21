@@ -53,6 +53,7 @@
         <estadodenuncia></estadodenuncia>
     </template>
     <template v-if="menu==16">
+    <tipodevia></tipodevia>
 
     </template>
     <template v-if="menu==17">
