@@ -33,4 +33,13 @@ Route::put('/tipoobra/activar', 'TipoobraController@activar');
 
 
 
+
+
+
+
 // rutas diego 
+Route::get('/estadodenuncia', 'EstadodenunciaController@index');
+Route::post('/estadodenuncia/registrar', 'EstadodenunciaController@store');
+Route::post('/estadodenuncia/actualizar', 'EstadodenunciaController@update');
+Route::post('/estadodenuncia/desactivar', 'EstadodenunciaController@desactivar');
+Route::post('/estadodenuncia/activar', 'EstadodenunciaController@activar');

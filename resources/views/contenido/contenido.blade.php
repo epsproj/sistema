@@ -50,7 +50,7 @@
 
     </template>
     <template v-if="menu==15">
-
+        <estadodenuncia></estadodenuncia>
     </template>
     <template v-if="menu==16">
 
