@@ -28,3 +28,9 @@ Route::post('/tipoobra/registrar', 'TipoobraController@store');
 Route::put('/tipoobra/actualizar', 'TipoobraController@update');
 Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
 Route::put('/tipoobra/activar', 'TipoobraController@activar');
+
+
+
+
+
+// rutas diego 
