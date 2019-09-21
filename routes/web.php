@@ -29,6 +29,7 @@ Route::put('/tipoobra/actualizar', 'TipoobraController@update');
 Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
 Route::put('/tipoobra/activar', 'TipoobraController@activar');
 
+<<<<<<< HEAD
 
 
 
@@ -43,3 +44,5 @@ Route::post('/estadodenuncia/registrar', 'EstadodenunciaController@store');
 Route::post('/estadodenuncia/actualizar', 'EstadodenunciaController@update');
 Route::post('/estadodenuncia/desactivar', 'EstadodenunciaController@desactivar');
 Route::post('/estadodenuncia/activar', 'EstadodenunciaController@activar');
+=======
+>>>>>>> dd84e45
