@@ -18,7 +18,7 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
+Vue.component('estadodenuncia', require('./components/Estadodenuncia.vue').default);
 
 Vue.component('cargoejecutor', require('./components/Cargoejecutor.vue').default);
 Vue.component('ejecutor', require('./components/Ejecutor.vue').default);
