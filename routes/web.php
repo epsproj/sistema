@@ -15,9 +15,7 @@
 Route::get('/', function () {
     return view('contenido/contenido');
 });
-//probando 
-//probando2
-//prueba angel
+//probando1
 Route::get('/cargoejecutor', 'CargoejecutorController@index');
 Route::post('/cargoejecutor/registrar', 'CargoejecutorController@store');
 Route::put('/cargoejecutor/actualizar', 'CargoejecutorController@update');
