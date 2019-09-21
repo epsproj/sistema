@@ -28,3 +28,9 @@ Route::post('/tipoobra/registrar', 'TipoobraController@store');
 Route::put('/tipoobra/actualizar', 'TipoobraController@update');
 Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
 Route::put('/tipoobra/activar', 'TipoobraController@activar');
+
+Route::get('/tipodevia', 'TipodeviaController@index');
+Route::post('/tipodevia/registrar', 'TipodeviaController@store');
+Route::post('/tipodevia/actualizar', 'TipodeviaController@update');
+Route::post('/tipodevia/desactivar', 'TipodeviaController@desactivar');
+Route::post('/tipodevia/activar', 'TipodeviaController@activar');

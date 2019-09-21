@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('cargoejecutor', require('./components/Cargoejecutor.vue').default);
 Vue.component('ejecutor', require('./components/Ejecutor.vue').default);
 Vue.component('tipoobra', require('./components/Tipoobra.vue').default);
+Vue.component('tipodevia', requiere('./componets/Tipodevia.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
