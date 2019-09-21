@@ -14,8 +14,19 @@ class TipoobraController extends Controller
      */
     public function index(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
-        $tipoobras = Tipoobra::paginate(5);
+        if (!$request->ajax()) return redirect('/');
+        
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+
+        if($buscar == ''){
+            $tipoobras = Tipoobra::orderby('id', 'desc')->paginate(5);
+        }
+        else{
+            $tipoobras = Tipoobra::where($criterio, 'like', '%'. $buscar . '%')->orderby('id', 'desc')->paginate(5);
+        }
+
+        
         return [
             'pagination' => [
                 'total'         => $tipoobras->total(),
