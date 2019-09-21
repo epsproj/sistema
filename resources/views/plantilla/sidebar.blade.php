@@ -11,7 +11,7 @@
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-university"></i>nivel1</a>
                 <ul class="nav-dropdown-items">
                     <li @click="menu=1" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-database"></i>submodulo</a>
+                        <a class="nav-link" href="#"><i class="nav-icon fa fa-database"></i>Tipo Obra</a>
                     </li>
                     <li @click="menu=2" class="nav-item">
                         <a class="nav-link" href="#"><i class="nav-icon fa fa-users"></i>submodulo</a>
