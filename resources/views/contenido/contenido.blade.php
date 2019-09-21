@@ -3,8 +3,6 @@
     <template v-if="menu==0">
         <h1>Contenido 1</h1>
     </template>
-
-
     <template v-if="menu==1">
         <tipoobra></tipoobra>
     </template>
@@ -50,7 +48,7 @@
 
     </template>
     <template v-if="menu==15">
-        <estadodenuncia></estadodenuncia>
+        <h1>pruebasssssssss</h1>
     </template>
     <template v-if="menu==16">
     <tipodevia></tipodevia>
