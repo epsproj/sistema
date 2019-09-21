@@ -22,8 +22,9 @@ Route::put('/cargoejecutor/actualizar', 'CargoejecutorController@update');
 Route::put('/cargoejecutor/desactivar', 'CargoejecutorController@desactivar');
 Route::put('/cargoejecutor/activar', 'CargoejecutorController@activar');
 
-
-
-
-
-
+//Tipo Obra
+Route::get('/tipoobra', 'TipoobraController@index');
+Route::post('/tipoobra/registrar', 'TipoobraController@store');
+Route::put('/tipoobra/actualizar', 'TipoobraController@update');
+Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
+Route::put('/tipoobra/activar', 'TipoobraController@activar');
