@@ -29,14 +29,6 @@ Route::put('/tipoobra/actualizar', 'TipoobraController@update');
 Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
 Route::put('/tipoobra/activar', 'TipoobraController@activar');
 
-
-
-
-
-
-
-
-
 // rutas diego 
 Route::get('/estadodenuncia', 'EstadodenunciaController@index');
 Route::post('/estadodenuncia/registrar', 'EstadodenunciaController@store');
