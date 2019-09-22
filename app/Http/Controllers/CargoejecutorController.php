@@ -14,17 +14,34 @@ class CargoejecutorController extends Controller
     public function index()
     {
         //
+         //
+       if(!$request->ajax()) return redirect('/');
+
+       $buscar = $request->buscar;
+       $criterio = $request->criterio;
+
+       if ($buscar==''){
+        $cargoejecutores = Cargoejecutor::orderBy('id', 'desc')->paginate(3);
+        }
+        else{
+            $cargoejecutores = Cargoejecutor::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
+        }
+       //$cargoejecutores=Cargoejecutor::paginate(2);
+        //return $cargoejecutores;
+        return [
+            'pagination' => [
+                'total'        => $cargoejecutores->total(),
+                'current_page' => $cargoejecutores->currentPage(),
+                'per_page'     => $cargoejecutores->perPage(),
+                'last_page'    => $cargoejecutores->lastPage(),
+                'from'         => $cargoejecutores->firstItem(),
+                'to'           => $cargoejecutores->lastItem(),
+            ],
+            'cargoejecutores' => $cargoejecutores
+        ];
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -41,27 +58,8 @@ class CargoejecutorController extends Controller
         $cargoejecutor->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
