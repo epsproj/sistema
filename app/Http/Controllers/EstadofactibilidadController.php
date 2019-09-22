@@ -12,10 +12,31 @@ class EstadofactibilidadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $estadofactibilidades = Estadofactibilidad::all();
-        return $estadofactibilidades;
+        if (!$request->ajax()) return redirect('/');
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+
+        if($buscar == ''){
+            $estadofactibilidades = Estadofactibilidad::orderby('id', 'desc')->paginate(5);
+        }
+        else{
+            $estadofactibilidades = Estadofactibilidad::where($criterio, 'like', '%'. $buscar . '%')->orderby('id', 'desc')->paginate(5);
+        }
+
+        return [
+            'pagination' => [
+                'total'         => $estadofactibilidades->total(),
+                'current_page'  => $estadofactibilidades->currentPage(),
+                'per_page'      => $estadofactibilidades->perPage(),
+                'last_page'     => $estadofactibilidades->lastPage(),
+                'from'          => $estadofactibilidades->firstItem(),
+                'to'            => $estadofactibilidades->lastItem(),
+            ],
+            'estadofactibilidades' => $estadofactibilidades
+        ];
     }
 
     /**
@@ -36,7 +57,7 @@ class EstadofactibilidadController extends Controller
      */
     public function store(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
         $estadofactibilidades = new Estadofactibilidad();
         $estadofactibilidades->nombre = $request->nombre;
         $estadofactibilidades->estado = '1';
@@ -74,7 +95,7 @@ class EstadofactibilidadController extends Controller
      */
     public function update(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
         $estadofactibilidades = Estadofactibilidad::findOrFail($request->id);
         $estadofactibilidades->nombre = $request->nombre;
         $estadofactibilidades->estado = '1';
@@ -95,7 +116,7 @@ class EstadofactibilidadController extends Controller
 
     public function desactivar(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
         $estadofactibilidades = Estadofactibilidad::findOrFail($request->id);
         $estadofactibilidades->estado = '0';
         $estadofactibilidades->save();
@@ -103,7 +124,7 @@ class EstadofactibilidadController extends Controller
 
     public function activar(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
         $estadofactibilidades = Estadofactibilidad::findOrFail($request->id);
         $estadofactibilidades->estado = '1';
         $estadofactibilidades->save();

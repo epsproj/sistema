@@ -177,7 +177,7 @@
                     to = this.pagination.last_page;
                 }
 
-                var pagesArray = []
+                var pagesArray = [];
                 while(from <= to) {
                     pagesArray.push(from);
                     from++;
@@ -240,7 +240,7 @@
             },
             desactivarTipoobra(id){
                 swal({
-                title: '¿Etá seguro de desactivar el Tipo de Obra?',
+                title: '¿Está seguro de desactivar el Tipo de Obra?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -283,7 +283,7 @@
             },
             activarTipoobra(id){
                 swal({
-                title: '¿Etá seguro de activar este Tipo de Obra?',
+                title: '¿Está seguro de activar este Tipo de Obra?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
