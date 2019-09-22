@@ -9,5 +9,7 @@ class Tipodevia extends Model
     protected $table = 'tipodevia';
     //protected $pri
     //
-    protected $fillable = ['nombre','descripcion','condicion'];
+    protected $fillable = ['nombre',
+    'descripcion',
+    'condicion'];
 }
