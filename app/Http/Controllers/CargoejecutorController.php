@@ -13,10 +13,9 @@ class CargoejecutorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-         //
        if(!$request->ajax()) return redirect('/');
 
        $buscar = $request->buscar;
@@ -43,6 +42,14 @@ class CargoejecutorController extends Controller
         ];
     }
 
+    public function selectCargoejecutor(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        $cargoejecutores=Cargoejecutor::where('estado','=','1')
+        ->select('id','nombre')->orderBy('nombre','asc')->get();
+
+        return ['cargoejecutores'=> $cargoejecutores];
+    }
+
     
 
     /**
@@ -60,9 +67,8 @@ class CargoejecutorController extends Controller
         $cargoejecutor->save();
     }
 
+
     
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -72,7 +78,6 @@ class CargoejecutorController extends Controller
      */
     public function update(Request $request)
     {
-        
         if(!$request->ajax()) return redirect('/');
         $cargoejecutor=Cargoejecutor::findOrFail($request->id);
         $cargoejecutor->nombre=$request->nombre;
@@ -95,4 +100,7 @@ class CargoejecutorController extends Controller
         $cargoejecutor->estado='1';
         $cargoejecutor->save();
     }
+
+   
+
 }

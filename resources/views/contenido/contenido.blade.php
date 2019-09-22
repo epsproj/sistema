@@ -10,17 +10,17 @@
     </template>
 
     <template v-if="menu==2">
-        <cargoejecutor></cargoejecutor>
+        
     </template>
 
     <template v-if="menu==3">
-        <ejecutor></ejecutor>
+        
     </template>
     <template v-if="menu==4">
-        
+    <ejecutor></ejecutor>
     </template>
     <template v-if="menu==5">
-        
+    <cargoejecutor></cargoejecutor>
     </template>
     <template v-if="menu==6">
 
