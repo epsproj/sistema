@@ -6,37 +6,41 @@
                     <i class="nav-icon fa fa-desktop"></i> Escritorio
                 </a>
             </li>
-            <li class="nav-title bg-dropbox">Modulo1</li>
+            <!--<li class="nav-title bg-dropbox">Administrativo</li>-->
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-university"></i>nivel1</a>
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-university"></i>Factibilidad</a>
                 <ul class="nav-dropdown-items">
                     <li @click="menu=1" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-database"></i>Tipo Obra</a>
+                        <a class="nav-link" href="#"><i class="nav-icon fa fa-database"></i>Solicitudes</a>
                     </li>
                     <li @click="menu=2" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-users"></i>submodulo</a>
+                        <a class="nav-link" href="#"><i class="nav-icon fa fa-users"></i>Estados</a>
                     </li>
-                    <li @click="menu=3" class="nav-item">
+                    <!--<li @click="menu=3" class="nav-item">
                         <a class="nav-link" href="#"><i class="nav-icon fa fa-columns"></i>submodulo</a>
-                    </li>
-                    <li @click="menu=4" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-book"></i>submodulo</a>
+                    </li>-->
+                    <li @click="menu=3" class="nav-item">
+                        <a class="nav-link" href="#"><i class="nav-icon fa fa-book"></i>Tipo de obras</a>
                     </li>
                 </ul>
             </li>
-            <li class="nav-title bg-tumblr">Modulo2</li>
+           <!-- <li class="nav-title bg-tumblr">Modulo2</li>-->
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-sign-out"></i>submodulo</a>
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-sign-out"></i>Ejecutor</a>
                 <ul class="nav-dropdown-items">
+                    <li @click="menu=4" class="nav-item">
+                        <a class="nav-link" href="#"><i class="nav-icon fa  fa-share"></i>Ejecutor</a>
+                    </li>
+
                     <li @click="menu=5" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa  fa-share"></i>submodulo</a>
+                        <a class="nav-link" href="#"><i class="nav-icon fa  fa-columns"></i>Cargos</a>
                     </li>
                 </ul>
             </li>
             <li @click="menu=6" class="nav-item">
-                <a class="nav-link" href="#"><i class="nav-icon fa fa-user-circle-o"></i>submodulo</a>
+                <a class="nav-link" href="#"><i class="nav-icon fa fa-user-circle-o"></i>Personas</a>
             </li>
-            <li class="nav-title bg-google-plus">modulo3</li>
+            <!--<li class="nav-title bg-google-plus">modulo3</li>-->
             <li class="nav-item nav-dropdown">
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-plus-square"></i>submodulo</a>
                 <ul class="nav-dropdown-items">
@@ -70,7 +74,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-title bg-facebook">modulo4</li>
+            <!--<li class="nav-title bg-facebook">modulo4</li>-->
             <li @click="menu=13" class="nav-item">
                 <a class="nav-link" href="#"><i class="nav-icon fa fa-info-circle"></i>Ayuda <span class="badge badge-light">PDF</span></a>
             </li>
