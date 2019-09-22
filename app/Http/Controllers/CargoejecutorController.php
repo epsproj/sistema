@@ -34,7 +34,11 @@ class CargoejecutorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!$request->ajax()) return redirect('/');
+        $cargoejecutor=new Cargoejecutor();
+        $cargoejecutor->nombre=$request->nombre;
+        $cargoejecutor->estado='1';
+        $cargoejecutor->save();
     }
 
     /**
@@ -66,19 +70,29 @@ class CargoejecutorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
+        if(!$request->ajax()) return redirect('/');
+        $cargoejecutor=Cargoejecutor::findOrFail($request->id);
+        $cargoejecutor->nombre=$request->nombre;
+        $cargoejecutor->estado='1';
+        $cargoejecutor->save();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function desactivar(Request $request)
     {
-        //
+        if(!$request->ajax()) return redirect('/');
+        $cargoejecutor=Cargoejecutor::findOrFail($request->id);
+        $cargoejecutor->estado='0';
+        $cargoejecutor->save();
+    }
+
+    public function activar(Request $request)
+    {
+        if(!$request->ajax()) return redirect('/');
+        $cargoejecutor=Cargoejecutor::findOrFail($request->id);
+        $cargoejecutor->estado='1';
+        $cargoejecutor->save();
     }
 }
