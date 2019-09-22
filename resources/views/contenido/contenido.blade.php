@@ -49,17 +49,4 @@
     <template v-if="menu==14">
 
     </template>
-    <template v-if="menu==15">
-        <estadodenuncia></estadodenuncia>
-    </template>
-    <template v-if="menu==16">
-    <tipodevia></tipodevia>
-
-    </template>
-    <template v-if="menu==17">
-
-    </template>
-    <template v-if="menu==18">
-
-    </template>
 @endsection

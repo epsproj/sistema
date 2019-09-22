@@ -77,29 +77,6 @@
             <li @click="menu=14" class="nav-item">
                 <a class="nav-link" href="#"><i class="nav-icon fa fa-question-circle"></i>Acerca de...</a>
             </li>
-
-
-            <li class="nav-title bg-dropbox">Modulo5</li>
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-university"></i>nivel1</a>
-                <ul class="nav-dropdown-items">
-                    <li @click="menu=15" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-database"></i>Estado Denuncia </a>
-                    </li>
-                    <li @click="menu=16" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-users"></i>Tipo Via</a>
-                    </li>
-                    <li @click="menu=17" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-columns"></i>submodulo</a>
-                    </li>
-                    <li @click="menu=18" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa fa-book"></i>submodulo</a>
-                    </li>
-                </ul>
-            </li>
-
-            
-
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>
