@@ -29,7 +29,7 @@
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-sign-out"></i>submodulo</a>
                 <ul class="nav-dropdown-items">
                     <li @click="menu=5" class="nav-item">
-                        <a class="nav-link" href="#"><i class="nav-icon fa  fa-share"></i>submodulo</a>
+                        <a class="nav-link" href="#"><i class="nav-icon fa  fa-share"></i>Estado Factibilidad</a>
                     </li>
                 </ul>
             </li>

@@ -20,7 +20,7 @@
         
     </template>
     <template v-if="menu==5">
-        
+        <estadofactibilidad></estadofactibilidad>
     </template>
     <template v-if="menu==6">
 

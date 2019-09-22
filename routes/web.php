@@ -29,3 +29,11 @@ Route::post('/tipoobra/registrar', 'TipoobraController@store');
 Route::put('/tipoobra/actualizar', 'TipoobraController@update');
 Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
 Route::put('/tipoobra/activar', 'TipoobraController@activar');
+
+
+//Estado Factibilidad
+Route::get('/estadofactibilidad', 'EstadofactibilidadController@index');
+Route::post('/estadofactibilidad/registrar', 'EstadofactibilidadController@store');
+Route::put('/estadofactibilidad/actualizar', 'EstadofactibilidadController@update');
+Route::put('/estadofactibilidad/desactivar', 'EstadofactibilidadController@desactivar');
+Route::put('/estadofactibilidad/activar', 'EstadofactibilidadController@activar');
