@@ -1896,111 +1896,220 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      Tipoobra_id: 0,
       nombre: '',
-      descripcion: '',
-      arrayCategoria: [],
+      arrayTipoobra: [],
       modal: 0,
       tituloModal: '',
       tipoAccion: 0,
-      errorCategoria: 0,
-      errorMostrarMsjCategoria: []
+      errorTipoobra: 0,
+      errorMostrarMsjTipoobra: [],
+      pagination: {
+        'total': 0,
+        'current_page': 0,
+        'per_page': 0,
+        'last_page': 0,
+        'from': 0,
+        'to': 0
+      },
+      offset: 3
     };
   },
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    //Calcular los elementos de la pagina
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+
+      var from = this.pagination.current_page - this.offset;
+
+      if (from < 1) {
+        from = 1;
+      }
+
+      var to = from + this.offset * 2;
+
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pagesArray = [];
+
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+
+      return pagesArray;
+    }
+  },
   methods: {
-    listarCategoria: function listarCategoria() {
+    listarTipoobra: function listarTipoobra(page) {
       var me = this;
-      axios.get('/categoria').then(function (response) {
-        me.arrayCategoria = response.data;
+      var url = '/tipoobra?page=' + page;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arrayTipoobra = respuesta.tipoobras.data;
+        me.pagination = respuesta.pagination;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    registrarCategoria: function registrarCategoria() {
-      if (this.validarCategoria()) {
+    cambiarPagina: function cambiarPagina(page) {
+      var me = this; //actualizala pagina actual
+
+      me.pagination.current_page = page; //enviar la peticion para visualizar la data de esta pàgina
+
+      me.listarTipoobra(page);
+    },
+    registrarTipoobra: function registrarTipoobra() {
+      if (this.validarTipoobra()) {
         return;
       }
 
       var me = this;
-      axios.post('/categoria/registrar', {
-        'nombre': this.nombre,
-        'descripcion': this.descripcion
+      axios.post('/tipoobra/registrar', {
+        'nombre': this.nombre
       }).then(function (response) {
         me.cerrarModal();
-        me.listarCategoria();
+        me.listarTipoobra();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    validarCategoria: function validarCategoria() {
-      this.errorCategoria = 0;
-      this.errorMostrarMsjCategoria = [];
-      if (!this.nombre) this.errorMostrarMsjCategoria.push("El nombre de la categoría no puede estar vacío.");
-      if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
-      return this.errorCategoria;
+    actualizarTipoobra: function actualizarTipoobra() {
+      if (this.validarTipoobra()) {
+        return;
+      }
+
+      var me = this;
+      axios.put('/tipoobra/actualizar', {
+        'nombre': this.nombre,
+        'id': this.Tipoobra_id
+      }).then(function (response) {
+        me.cerrarModal();
+        me.listarTipoobra();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    desactivarTipoobra: function desactivarTipoobra(id) {
+      var _this = this;
+
+      swal({
+        title: '¿Etá seguro de desactivar el Tipo de Obra?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this;
+          axios.put('/tipoobra/desactivar', {
+            'id': id
+          }).then(function (response) {
+            me.listarTipoobra();
+            swal('Desactivado!', 'El registro ha sido desactivado con éxito', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Cancelado', 'El registro ha sido cancelado', 'error');
+        }
+      });
+    },
+    activarTipoobra: function activarTipoobra(id) {
+      var _this2 = this;
+
+      swal({
+        title: '¿Etá seguro de activar este Tipo de Obra?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonStyling: false,
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          var me = _this2;
+          axios.put('/tipoobra/activar', {
+            'id': id
+          }).then(function (response) {
+            me.listarTipoobra();
+            swal('Activado!', 'El registro ha sido activado con éxito', 'success');
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire('Cancelado', 'El registro ha sido cancelado', 'error');
+        }
+      });
+    },
+    validarTipoobra: function validarTipoobra() {
+      this.errorTipoobra = 0;
+      this.errorMostrarMsjTipoobra = [];
+      if (!this.nombre) this.errorMostrarMsjTipoobra.push("El nombre de Tipo de Obra no puede estar vacío.");
+      if (this.errorMostrarMsjTipoobra.length) this.errorTipoobra = 1;
+      return this.errorTipoobra;
     },
     cerrarModal: function cerrarModal() {
       this.modal = 0;
       this.tituloModal = '';
       this.nombre = '';
-      this.descripcion = '';
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
       switch (modelo) {
-        case "categoria":
+        case "tipoobra":
           {
             switch (accion) {
               case 'registrar':
                 {
                   this.modal = 1;
-                  this.tituloModal = 'Registrar Categoría';
+                  this.tituloModal = 'Registar Tipo Obra';
                   this.nombre = '';
-                  this.descripcion = '';
                   this.tipoAccion = 1;
                   break;
                 }
 
               case 'actualizar':
-                {}
+                {
+                  this.modal = 1;
+                  this.tituloModal = 'Actualizar Tipo Obra';
+                  this.tipoAccion = 2;
+                  this.Tipoobra_id = data['id'];
+                  this.nombre = data['nombre'];
+                  break;
+                }
             }
           }
       }
     }
   },
   mounted: function mounted() {
-    this.listarCategoria();
+    this.listarTipoobra();
   }
 });
 
@@ -2398,7 +2507,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    display: flex;\n    justify-content: center;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\n.modalcontent{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background: #3c29297a !important;\n}\n.div-error{\n    display: flex;\n    justify-content: center;\n}\n.text-error{\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -21109,7 +21218,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Categorías\n                "),
+          _vm._v(" Tipo Obra\n                    "),
           _c(
             "button",
             {
@@ -21117,13 +21226,13 @@ var render = function() {
               attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.abrirModal("categoria", "registrar")
+                  return _vm.abrirModal("tipoobra", "registrar")
                 }
               }
             },
             [
               _c("i", { staticClass: "icon-plus" }),
-              _vm._v(" Nuevo\n                ")
+              _vm._v(" Nuevo\n                    ")
             ]
           )
         ]),
@@ -21139,40 +21248,72 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.arrayCategoria, function(categoria) {
-                  return _c("tr", { key: categoria.id }, [
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-warning btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal(
-                                "categoria",
-                                "actualizar",
-                                categoria
-                              )
+                _vm._l(_vm.arrayTipoobra, function(tipoobra) {
+                  return _c("tr", { key: tipoobra.id }, [
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal(
+                                  "tipoobra",
+                                  "actualizar",
+                                  tipoobra
+                                )
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-pencil" })]
-                      ),
-                      _vm._v("  \n                                "),
-                      _vm._m(3, true)
-                    ]),
+                          },
+                          [_c("i", { staticClass: "icon-pencil" })]
+                        ),
+                        _vm._v(
+                          "  \n                                    \n                                    "
+                        ),
+                        tipoobra.estado
+                          ? [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.desactivarTipoobra(tipoobra.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-trash" })]
+                              )
+                            ]
+                          : [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-info btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.activarTipoobra(tipoobra.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "icon-check" })]
+                              )
+                            ]
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(categoria.nombre) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(categoria.descripcion) }
+                      domProps: { textContent: _vm._s(tipoobra.nombre) }
                     }),
                     _vm._v(" "),
                     _c("td", [
-                      categoria.condicion
+                      tipoobra.estado
                         ? _c("div", [
                             _c("span", { staticClass: "badge badge-success" }, [
                               _vm._v("Activo")
@@ -21191,7 +21332,84 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(4)
+          _c("nav", [
+            _c(
+              "ul",
+              { staticClass: "pagination" },
+              [
+                _vm.pagination.current_page > 1
+                  ? _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.cambiarPagina(
+                                _vm.pagination.currente_page - 1
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("Ant")]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.pagesNumber, function(page) {
+                  return _c(
+                    "li",
+                    {
+                      key: page,
+                      staticClass: "page-item",
+                      class: [page == _vm.isActived ? "active" : ""]
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          domProps: { textContent: _vm._s(page) },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.cambiarPagina(page)
+                            }
+                          }
+                        },
+                        [_vm._v("1")]
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _vm.pagination.current_page < _vm.pagination.last_page
+                  ? _c("li", { staticClass: "page-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.cambiarPagina(
+                                _vm.pagination.currente_page + 1
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("Sig")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
+            )
+          ])
         ])
       ])
     ]),
@@ -21278,7 +21496,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nombre de categoría"
+                            placeholder: "Nombre de Tipo de Obra"
                           },
                           domProps: { value: _vm.nombre },
                           on: {
@@ -21289,45 +21507,11 @@ var render = function() {
                               _vm.nombre = $event.target.value
                             }
                           }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group row" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 form-control-label",
-                          attrs: { for: "email-input" }
-                        },
-                        [_vm._v("Descripción")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-9" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.descripcion,
-                              expression: "descripcion"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "email",
-                            placeholder: "Ingrese descripción"
-                          },
-                          domProps: { value: _vm.descripcion },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.descripcion = $event.target.value
-                            }
-                          }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v("(*) Ingrese el nombre de Tipo de Obra")
+                        ])
                       ])
                     ]),
                     _vm._v(" "),
@@ -21338,8 +21522,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.errorCategoria,
-                            expression: "errorCategoria"
+                            value: _vm.errorTipoobra,
+                            expression: "errorTipoobra"
                           }
                         ],
                         staticClass: "form-group row div-error"
@@ -21348,7 +21532,7 @@ var render = function() {
                         _c(
                           "div",
                           { staticClass: "text-center text-error" },
-                          _vm._l(_vm.errorMostrarMsjCategoria, function(error) {
+                          _vm._l(_vm.errorMostrarMsjTipoobra, function(error) {
                             return _c("div", {
                               key: error,
                               domProps: { textContent: _vm._s(error) }
@@ -21385,7 +21569,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.registrarCategoria()
+                            return _vm.registrarTipoobra()
                           }
                         }
                       },
@@ -21398,7 +21582,12 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-primary",
-                        attrs: { type: "button" }
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.actualizarTipoobra()
+                          }
+                        }
                       },
                       [_vm._v("Actualizar")]
                     )
@@ -21408,9 +21597,7 @@ var render = function() {
           ]
         )
       ]
-    ),
-    _vm._v(" "),
-    _vm._m(5)
+    )
   ])
 }
 var staticRenderFns = [
@@ -21441,13 +21628,7 @@ var staticRenderFns = [
               staticClass: "form-control col-md-3",
               attrs: { id: "opcion", name: "opcion" }
             },
-            [
-              _c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "descripcion" } }, [
-                _vm._v("Descripción")
-              ])
-            ]
+            [_c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")])]
           ),
           _vm._v(" "),
           _c("input", {
@@ -21479,140 +21660,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Descripción")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-danger btn-sm", attrs: { type: "button" } },
-      [_c("i", { staticClass: "icon-trash" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("nav", [
-      _c("ul", { staticClass: "pagination" }, [
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Ant")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item active" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("1")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("2")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("3")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("4")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Sig")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        staticStyle: { display: "none" },
-        attrs: {
-          id: "modalEliminar",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-danger",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h4", { staticClass: "modal-title" }, [
-                  _vm._v("Eliminar Categoría")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("p", [_vm._v("Estas seguro de eliminar la categoría?")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-danger", attrs: { type: "button" } },
-                  [_vm._v("Eliminar")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -34388,7 +34438,6 @@ Vue.component('estadodenuncia', __webpack_require__(/*! ./components/Estadodenun
 Vue.component('cargoejecutor', __webpack_require__(/*! ./components/Cargoejecutor.vue */ "./resources/js/components/Cargoejecutor.vue")["default"]);
 Vue.component('ejecutor', __webpack_require__(/*! ./components/Ejecutor.vue */ "./resources/js/components/Ejecutor.vue")["default"]);
 Vue.component('tipoobra', __webpack_require__(/*! ./components/Tipoobra.vue */ "./resources/js/components/Tipoobra.vue")["default"]);
-Vue.component('tipodevia', requiere('./componets/Tipodevia.vue')["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
