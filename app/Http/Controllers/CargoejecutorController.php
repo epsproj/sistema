@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cargoejecutor;
+use Illuminate\Support\Facades\DB;
 
 class CargoejecutorController extends Controller
 {
