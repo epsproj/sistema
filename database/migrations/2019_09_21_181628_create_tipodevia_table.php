@@ -17,7 +17,7 @@ class CreateTipodeviaTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre',100);
             $table->string('descripcion',300)->nullable();
-            $table->boolean('condicion')->default(1);
+            $table->boolean('estado')->default(1);
             $table->timestamps();
         });
     }

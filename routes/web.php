@@ -39,3 +39,9 @@ Route::put('/tipoobra/actualizar', 'TipoobraController@update');
 Route::put('/tipoobra/desactivar', 'TipoobraController@desactivar');
 Route::put('/tipoobra/activar', 'TipoobraController@activar');
 
+Route::get('/persona', 'PersonaController@index');
+Route::post('/persona/registrar', 'PersonaController@store');
+Route::put('/persona/actualizar', 'PersonaController@update');
+Route::put('/persona/desactivar', 'PersonaController@desactivar');
+Route::put('/persona/activar', 'PersonaController@activar');
+

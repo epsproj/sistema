@@ -23,7 +23,7 @@
     <cargoejecutor></cargoejecutor>
     </template>
     <template v-if="menu==6">
-
+    <persona></persona>
     </template>
     <template v-if="menu==7">
         

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstadodenunciaTable extends Migration
+class CreatePersonasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateEstadodenunciaTable extends Migration
      */
     public function up()
     {
-        Schema::create('estadodenuncia', function (Blueprint $table) {
+        Schema::create('personas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre',50);
-            $table->string('descripcion',256)->nullable();
+            $table->string('nombre',100);
+            $table->string('apellido',100);
+            $table->string('direccion',100);
+            $table->string('telefono',50);
+            $table->string('correo',100)->nullable();
             $table->boolean('estado')->default(1);
             $table->timestamps();
         });
@@ -29,6 +32,6 @@ class CreateEstadodenunciaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estadodenuncia');
+        Schema::dropIfExists('personas');
     }
 }
