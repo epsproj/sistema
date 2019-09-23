@@ -31,6 +31,7 @@
                             <thead>
                                 <tr>
                                     <th>Opciones</th>
+                                    <th>DPI</th>
                                     <th>Nombre</th>
                                      <th>Apellido</th>
                                       <th>Direccion</th>
@@ -59,6 +60,7 @@
                                         </template>
 
                                     </td>
+                                     <td v-text="persona.dpi"></td>
                                     <td v-text="persona.nombre"></td>
                                      <td v-text="persona.apellido"></td>
                                       <td v-text="persona.direccion"></td>
@@ -106,6 +108,13 @@
                         </div>
                         <div class="modal-body">
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">DPI</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="dpi" class="form-control" placeholder="DPI ">
+                                       
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
@@ -172,6 +181,7 @@
         data () {
             return {
                 Persona_id: 0,
+                dpi : '',
                 nombre : '',
                 apellido : '',
                 direccion : '',
@@ -253,6 +263,7 @@
                 let me = this;
 
                 axios.post('/persona/registrar',{
+                    'dpi' : this.dpi,
                     'nombre' : this.nombre,
                     'apellido' : this.apellido,
                     'direccion' : this.direccion,
@@ -273,6 +284,7 @@
                 let me = this;
 
                 axios.put('/persona/actualizar',{
+                    'dpi' : this.dpi,
                     'nombre' : this.nombre,
                     'apellido' : this.apellido,
                     'direccion' : this.direccion,
@@ -385,6 +397,7 @@
             cerrarModal(){
                 this.modal = 0;
                 this.tituloModal = '';
+                this.dpi = '';
                 this.nombre = '';
                 this.apellido = '';
                 this.direccion = '';
@@ -400,6 +413,7 @@
                             {
                                 this.modal = 1;
                                 this.tituloModal = 'Registar Persona';
+                                this.dpi = '';
                                 this.nombre = '';
                                 this.apellido = '';
                                 this.direccion = '';
@@ -414,6 +428,7 @@
                                 this.tituloModal = 'Actualizar Persona';
                                 
                                 this.Persona_id = data['id'];
+                                this.dpi = data['dpi'];
                                 this.nombre = data['nombre'];
                                 this.apellido = data['apellido'];
                                 this.direccion = data['direccion'];

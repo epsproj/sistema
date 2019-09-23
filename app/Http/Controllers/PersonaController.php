@@ -38,15 +38,15 @@ class PersonaController extends Controller
         ];
     }
 
-    public function selectCargoejecutor(Request $request){
+    
+
+    public function selectPersona(Request $request){
         if(!$request->ajax()) return redirect('/');
-        $cargoejecutores=Cargoejecutor::where('estado','=','1')
+        $personas=Persona::where('estado','=','1')
         ->select('id','nombre')->orderBy('nombre','asc')->get();
 
-        return ['cargoejecutores'=> $cargoejecutores];
+        return ['personas'=> $personas];
     }
-
-    
 
     /**
      * Store a newly created resource in storage.
@@ -58,6 +58,7 @@ class PersonaController extends Controller
     {
         if(!$request->ajax()) return redirect('/');
         $persona=new Persona();
+        $persona->dpi=$request->dpi;
         $persona->nombre=$request->nombre;
         $persona->apellido=$request->apellido;
         $persona->direccion=$request->direccion;
@@ -80,6 +81,7 @@ class PersonaController extends Controller
     {
         if(!$request->ajax()) return redirect('/');
         $persona=Persona::findOrFail($request->id);
+        $persona->dpi=$request->dpi;
         $persona->nombre=$request->nombre;
         $persona->apellido=$request->apellido;
         $persona->direccion=$request->direccion;

@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Persona extends Model
+class Estadofactibilidad extends Model
 {
     //
-    protected $fillable = ['dpi','nombre','apellido','direccion','telefono','correo','estado'];
+    protected $table='estadofactibilidades';
+    protected $fillable = ['nombre','estado'];
 
     public function solicitudfactibilidades()
     {

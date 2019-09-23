@@ -3,51 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tipoobra;
+use App\Estadofactibilidad;
+use Illuminate\Support\Facades\DB;
 
-class TipoobraController extends Controller
+class EstadofactibilidadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        
         $buscar = $request->buscar;
         $criterio = $request->criterio;
-
         if($buscar == ''){
-            $tipoobras = Tipoobra::orderby('id', 'desc')->paginate(5);
+            $estadofactibilidades = Estadofactibilidad::orderby('id', 'desc')->paginate(5);
         }
         else{
-            $tipoobras = Tipoobra::where($criterio, 'like', '%'. $buscar . '%')->orderby('id', 'desc')->paginate(5);
+            $estadofactibilidades = Estadofactibilidad::where($criterio, 'like', '%'. $buscar . '%')->orderby('id', 'desc')->paginate(5);
         }
-
-        
         return [
             'pagination' => [
-                'total'         => $tipoobras->total(),
-                'current_page'  => $tipoobras->currentPage(),
-                'per_page'      => $tipoobras->perPage(),
-                'last_page'     => $tipoobras->lastPage(),
-                'from'          => $tipoobras->firstItem(),
-                'to'            => $tipoobras->lastItem(),
+                'total'         => $estadofactibilidades->total(),
+                'current_page'  => $estadofactibilidades->currentPage(),
+                'per_page'      => $estadofactibilidades->perPage(),
+                'last_page'     => $estadofactibilidades->lastPage(),
+                'from'          => $estadofactibilidades->firstItem(),
+                'to'            => $estadofactibilidades->lastItem(),
             ],
-            'tipoobras' => $tipoobras
+            'estadofactibilidades' => $estadofactibilidades
         ];
     }
 
-    public function selecttipoobra(Request $request){
+    public function selectEstadofactibilidad(Request $request){
         if(!$request->ajax()) return redirect('/');
-        $tipoobras=Tipoobra::where('estado','=','1')
+        $estadofactibilidades=Estadofactibilidad::where('estado','=','1')
         ->select('id','nombre')->orderBy('nombre','asc')->get();
 
-        return ['tipoobras'=> $tipoobras];
+        return ['estadofactibilidades'=> $estadofactibilidades];
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +48,6 @@ class TipoobraController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -67,12 +57,11 @@ class TipoobraController extends Controller
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $tipoobra = new Tipoobra();
-        $tipoobra->nombre = $request->nombre;
-        $tipoobra->estado = '1';
-        $tipoobra->save();
+        $estadofactibilidades = new Estadofactibilidad();
+        $estadofactibilidades->nombre = $request->nombre;
+        $estadofactibilidades->estado = '1';
+        $estadofactibilidades->save();
     }
-
     /**
      * Display the specified resource.
      *
@@ -83,7 +72,6 @@ class TipoobraController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -94,7 +82,6 @@ class TipoobraController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -105,12 +92,11 @@ class TipoobraController extends Controller
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $tipoobra = Tipoobra::findOrFail($request->id);
-        $tipoobra->nombre = $request->nombre;
-        $tipoobra->estado = '1';
-        $tipoobra->save();
+        $estadofactibilidades = Estadofactibilidad::findOrFail($request->id);
+        $estadofactibilidades->nombre = $request->nombre;
+        $estadofactibilidades->estado = '1';
+        $estadofactibilidades->save();
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -121,21 +107,18 @@ class TipoobraController extends Controller
     {
         //
     }
-
     public function desactivar(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $tipoobra = Tipoobra::findOrFail($request->id);
-        $tipoobra->estado = '0';
-        $tipoobra->save();
+        $estadofactibilidades = Estadofactibilidad::findOrFail($request->id);
+        $estadofactibilidades->estado = '0';
+        $estadofactibilidades->save();
     }
-
     public function activar(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
-        $tipoobra = Tipoobra::findOrFail($request->id);
-        $tipoobra->estado = '1';
-        $tipoobra->save();
+        $estadofactibilidades = Estadofactibilidad::findOrFail($request->id);
+        $estadofactibilidades->estado = '1';
+        $estadofactibilidades->save();
     }
-    
 }

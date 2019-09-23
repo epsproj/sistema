@@ -6,15 +6,15 @@
 
 
     <template v-if="menu==1">
-        <tipoobra></tipoobra>
+    <solicitudfactibilidad></solicitudfactibilidad>
     </template>
 
     <template v-if="menu==2">
-        
+    <estadofactibilidad></estadofactibilidad>
     </template>
 
     <template v-if="menu==3">
-        
+    <tipoobra></tipoobra>
     </template>
     <template v-if="menu==4">
     <ejecutor></ejecutor>

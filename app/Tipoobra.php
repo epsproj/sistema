@@ -10,5 +10,10 @@ class Tipoobra extends Model
     public $timestamps = false;
     protected $primaryKey='id';
 
-    //protected $fillable = ['nombre', 'estado'];
+    protected $fillable = ['nombre', 'estado'];
+
+    public function solicitudfactibilidades()
+    {
+        return $this->hasMany('App\Solicitudfactibilidad');
+    }
 }

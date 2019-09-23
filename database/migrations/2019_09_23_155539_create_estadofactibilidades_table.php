@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePersonasTable extends Migration
+class CreateEstadofactibilidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreatePersonasTable extends Migration
      */
     public function up()
     {
-        Schema::create('personas', function (Blueprint $table) {
+        Schema::create('estadofactibilidades', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('dpi',20);
             $table->string('nombre',100);
-            $table->string('apellido',100);
-            $table->string('direccion',100);
-            $table->string('telefono',50);
-            $table->string('correo',100)->nullable();
             $table->boolean('estado')->default(1);
             $table->timestamps();
         });
@@ -33,6 +28,6 @@ class CreatePersonasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('estadofactibilidades');
     }
 }

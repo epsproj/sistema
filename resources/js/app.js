@@ -24,6 +24,8 @@ Vue.component('cargoejecutor', require('./components/Cargoejecutor.vue').default
 Vue.component('ejecutor', require('./components/Ejecutor.vue').default);
 Vue.component('tipoobra', require('./components/Tipoobra.vue').default);
 Vue.component('persona', require('./components/Persona.vue').default);
+Vue.component('estadofactibilidad', require('./components/Estadofactibilidad.vue').default);
+Vue.component('solicitudfactibilidad', require('./components/Solicitudfactibilidad.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

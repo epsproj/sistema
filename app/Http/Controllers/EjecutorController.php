@@ -45,6 +45,13 @@ class EjecutorController extends Controller
         ];
     }
 
+    public function selectEjecutor(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        $ejecutores=Ejecutor::where('estado','=','1')
+        ->select('id','nombre')->orderBy('nombre','asc')->get();
+
+        return ['ejecutores'=> $ejecutores];
+    }
 
 
     public function store(Request $request)

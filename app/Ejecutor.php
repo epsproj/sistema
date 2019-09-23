@@ -14,4 +14,9 @@ class Ejecutor extends Model
     public function cargoejecutor(){
         return $this->belongsTo('App\Cargoejecutor');
     }
+
+    public function solicitudfactibilidades()
+    {
+        return $this->hasMany('App\Solicitudfactibilidad');
+    }
 }
