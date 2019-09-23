@@ -37,7 +37,7 @@ Route::post('/estadodenuncia/desactivar', 'EstadodenunciaController@desactivar')
 Route::post('/estadodenuncia/activar', 'EstadodenunciaController@activar');
 
 
-Route::get('/tipodevia', 'TipodeviaController@index');
+Route::get('/tipodevia2', 'TipodeviaController@index');
 Route::post('/tipodevia/registrar', 'TipodeviaController@store');
 Route::post('/tipodevia/actualizar', 'TipodeviaController@update');
 Route::post('/tipodevia/desactivar', 'TipodeviaController@desactivar');
